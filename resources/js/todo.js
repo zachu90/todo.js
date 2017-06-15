@@ -39,9 +39,9 @@ class List {
   }
 
   // Add task to the list
-  static addTask(task) {
+  static addTask(task, list) {
     task = Task.render(task);
-    $("button").closest("div.list-container").find("div.list-tasks ul").append("<li>" + task + "</li>");
+    $(list).closest("div.list-container").find("div.list-tasks ul").append("<li>" + task + "</li>");
   }
 }
 
@@ -95,6 +95,6 @@ $(document).ready(function() {
     var content = $(this).closest("div.list-container").find(".task-content-input").val();
     var task = new Task(title, content);
 
-    List.addTask(task);
+    List.addTask(task, this);
   });
 });
