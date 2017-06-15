@@ -1,5 +1,8 @@
 'use strict';
 
+/**
+ * List is a collection of tasks
+ */
 class List {
   constructor(title) {
     this.title = title;
@@ -23,13 +26,26 @@ class List {
   }
 
   render() {
-    return '<h1>' + this.title + '</h1>';
+    var tasks = '<ul>';
+    $.each(this.tasks, function(index, task) {
+      tasks += '<li>' + Task.render(task) + '</li>';
+    });
+
+    tasks += '</ul>';
+    return '<h1>' + this.title + '</h1>' + tasks;
   }
 }
 
-class Task{
+/**
+ * Structure and behaviour of individual task
+ */
+class Task {
   constructor(title, content) {
     this.title = title;
     this.content = content;
+  }
+
+  static render(task) {
+    return task.title + ': ' + task.content
   }
 }

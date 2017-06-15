@@ -5,6 +5,12 @@
     <meta charset="utf-8">
     <meta http-equiv="content-type" content="text/html">
     <title> TODO List </title>
+
+    <style>
+    .tasks {
+      border: 1px solid black;
+    }
+    </style>
   </head>
   <body>
 
@@ -24,7 +30,11 @@
     <script src="resources/js/todo.js"></script>
 
     <script>
-      // This will handle tasks operations
+      var list = new List("My Tasks");
+      list.addTask(new Task("First Task", "Task Content"));
+      list.addTask(new Task("Second Task", "Task Content"));
+
+      $(".tasks").append(list.render());
     </script>
 
   </body>
