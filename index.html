@@ -27,12 +27,37 @@
     </footer>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.10/handlebars.min.js"></script>
     <script src="resources/js/todo.js"></script>
+
+    <script id="list-template" type="text/x-handlebars-template">
+      <div class="">
+        <h1>{{title}}</h1>
+        <div class="body">
+          {{{tasks}}}
+        </div>
+        <button class="">add task</button>
+      </div>
+    </script>
+
+    <script id="task-template" type="text/x-handlebars-template">
+      <b>{{title}}: </b> {{content}}
+    </script>
+
+    <script id="tasks-template" type="text/x-handlebars-template">
+      <div class="">
+        <ul>
+          {{#each tasks}}
+            <li>{{{this}}}</li>
+          {{/each}}
+        </ul>
+      </div>
+    </script>
 
     <script>
       var list = new List("My Tasks");
       list.addTask(new Task("First Task", "Task Content"));
-      list.addTask(new Task("Second Task", "Task Content"));
+      list.addTask(new Task("Second Task", "Second Task Content"));
 
       $(".tasks").append(list.render());
     </script>
