@@ -30,35 +30,47 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.10/handlebars.min.js"></script>
     <script src="resources/js/todo.js"></script>
 
+    <!-- List template -->
     <script id="list-template" type="text/x-handlebars-template">
-      <div class="">
+      <div class="list-container">
         <h1>{{title}}</h1>
-        <div class="body">
+        <div class="list-tasks">
           {{{tasks}}}
         </div>
-        <button class="">add task</button>
+
+        <input type="text" class="task-title-input" placeholder="Task title...">
+        <br />
+        <textarea class="task-content-input" placeholder="Task content..."></textarea>
+        <br />
+        <button class="add-task">add task</button>
       </div>
     </script>
 
+    <!-- Task template -->
     <script id="task-template" type="text/x-handlebars-template">
       <b>{{title}}: </b> {{content}}
     </script>
 
+    <!-- Tasks list template -->
     <script id="tasks-template" type="text/x-handlebars-template">
-      <div class="">
-        <ul>
-          {{#each tasks}}
-            <li>{{{this}}}</li>
-          {{/each}}
-        </ul>
-      </div>
+      <ul>
+        {{#each tasks}}
+          <li>{{{this}}}</li>
+        {{/each}}
+      </ul>
     </script>
 
+    <!-- Render list of tasks -->
     <script>
-      var list = new List("My Tasks");
-      list.addTask(new Task("First Task", "Task Content"));
-      list.addTask(new Task("Second Task", "Second Task Content"));
+      var data = {
+        title: "My Tasks",
+        tasks: [
+          new Task("First Task", "Task Content"),
+          new Task("Second Task", "Second Task Content")
+        ]
+      };
 
+      var list = new List(data);
       $(".tasks").append(list.render());
     </script>
 

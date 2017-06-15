@@ -5,9 +5,9 @@
  */
 class List {
   // Create a list
-  constructor(title) {
-    this.title = title;
-    this.tasks = new Array();
+  constructor(list) {
+    this.title = list.title;
+    this.tasks = list.tasks;
   }
 
   // Create list title
@@ -25,11 +25,6 @@ class List {
     return this.tasks;
   }
 
-  // Add task to the array
-  addTask(task) {
-    this.tasks.push(task);
-  }
-
   // Render list of tasks template
   render() {
     var tasks = Task.renderAll(this.tasks);
@@ -41,6 +36,12 @@ class List {
     }
 
     return template(data);
+  }
+
+  // Add task to the list
+  static addTask(task) {
+    task = Task.render(task);
+    $("button").closest("div.list-container").find("div.list-tasks ul").append("<li>" + task + "</li>");
   }
 }
 
@@ -88,5 +89,12 @@ class Task {
  * Handle events
  */
 $(document).ready(function() {
-  // All events will be handled here
+  // Add a task to the list
+  $(document).on("click", ".add-task", function() {
+    var title = $(this).closest("div.list-container").find(".task-title-input").val();
+    var content = $(this).closest("div.list-container").find(".task-content-input").val();
+    var task = new Task(title, content);
+
+    List.addTask(task);
+  });
 });
