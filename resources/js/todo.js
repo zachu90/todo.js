@@ -59,6 +59,12 @@ class List {
     task = Task.render(task);
     $(element).closest("li").empty().append(task);
   }
+
+  // Discard task editing
+  static discardEditTask(task, element) {
+    task = Task.render(task);
+    $(element).closest("li").empty().append(task);
+  }
 }
 
 /**
@@ -156,5 +162,14 @@ $(document).ready(function() {
     var task = new Task(title, content);
 
     List.updateTask(task, this);
+  });
+
+  // Discard task changes
+  $(document).on("click", ".task-edit-discard", function() {
+    var title = $(this).closest("li").find("input[name=title]").val();
+    var content = $(this).closest("li").find("input[name=content]").val();
+    var task = new Task(title, content);
+
+    List.discardEditTask(task, this);
   });
 });
