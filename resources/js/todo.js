@@ -54,15 +54,11 @@ class List {
     $(task).closest("li").empty().append(template);
   }
 
-
-
   // Update the task
-  static updateTask(task) {
-    // TO DO
-  }    
-
-
-
+  static updateTask(task, element) {
+    task = Task.render(task);
+    $(element).closest("li").empty().append(task);
+  }
 }
 
 /**
@@ -153,13 +149,12 @@ $(document).ready(function() {
     List.editTask(this, template);
   });
 
-
-
   // Update the task
   $(document).on("click", ".task-update", function() {
-    // TO DO
+    var title = $(this).closest("li").find(".task-title-input").val();
+    var content = $(this).closest("li").find(".task-content-input").val();
+    var task = new Task(title, content);
+
+    List.updateTask(task, this);
   });
-
-
-  
 });
