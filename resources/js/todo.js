@@ -43,6 +43,26 @@ class List {
     task = Task.render(task);
     $(list).closest("div.list-container").find("div.list-tasks ul").append("<li>" + task + "</li>");
   }
+
+  // Remove task from the list
+  static removeTask(task) {
+    $(task).closest("li").remove();
+  }
+
+  // Edit the task from the list
+  static editTask(task, template) {
+    $(task).closest("li").empty().append(template);
+  }
+
+
+
+  // Update the task
+  static updateTask(task) {
+    // TO DO
+  }    
+
+
+
 }
 
 /**
@@ -55,9 +75,18 @@ class Task {
     this.content = content;
   }
 
+  // Get existing task title
+  static getTitle(task) {
+    return $(task).closest("span.task").find(".task-title").text();
+  }
+
+  // Get existing task content
+  static getContent(task) {
+    return $(task).closest("span.task").find(".task-content").text();
+  }
+
   // Render tasks list template
   static renderAll(tasksArray) {
-
     var tasks = new Array;
     $.each(tasksArray, function(index, task) {
       tasks.push(Task.render(task));
@@ -83,6 +112,14 @@ class Task {
 
     return template(data);
   }
+
+  // Render the task edit template
+  static renderEdit(data) {
+    var source = $("script#task-edit-template").html();
+    var template = Handlebars.compile(source);
+
+    return template(data);
+  }
 }
 
 /**
@@ -90,11 +127,39 @@ class Task {
  */
 $(document).ready(function() {
   // Add a task to the list
-  $(document).on("click", ".add-task", function() {
+  $(document).on("click", ".task-add", function() {
     var title = $(this).closest("div.list-container").find(".task-title-input").val();
     var content = $(this).closest("div.list-container").find(".task-content-input").val();
     var task = new Task(title, content);
 
     List.addTask(task, this);
   });
+
+  // Delete task from the list
+  $(document).on("click", ".task-delete", function() {
+    List.removeTask(this);
+  });
+
+  // Edit the task
+  $(document).on("click", ".task-edit", function() {
+    var title = Task.getTitle(this);
+    var content = Task.getContent(this);
+
+    var template = Task.renderEdit({
+      title: title,
+      content: content
+    });
+
+    List.editTask(this, template);
+  });
+
+
+
+  // Update the task
+  $(document).on("click", ".task-update", function() {
+    // TO DO
+  });
+
+
+  
 });
