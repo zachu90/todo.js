@@ -87,6 +87,16 @@ class Task {
     return $(task).closest("span.task").find(".task-content").text();
   }
 
+  // Toggles between completed/uncompleted status
+  static toggleStatus(task) {
+    if($(task).hasClass("task-completed")) {
+      $(task).removeClass("task-completed");
+      return false;
+    }
+
+    $(task).addClass("task-completed");
+  }
+
   // Render tasks list template
   static renderAll(tasksArray) {
     var tasks = new Array;
@@ -171,5 +181,10 @@ $(document).ready(function() {
     var task = new Task(title, content);
 
     List.discardEditTask(task, this);
+  });
+
+  // Toggle task status
+  $(document).on("click", ".task-status", function() {
+    Task.toggleStatus(this);
   });
 });

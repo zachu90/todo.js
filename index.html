@@ -7,9 +7,17 @@
     <title> TODO List </title>
 
     <style>
-    .tasks {
-      border: 1px solid black;
-    }
+      .no-bullets {
+          list-style-type: none;
+      }
+
+      .tasks {
+        border: 1px solid black;
+      }
+
+      .task-completed {
+        color: green;
+      }
     </style>
   </head>
   <body>
@@ -49,6 +57,7 @@
     <!-- Task template -->
     <script id="task-template" type="text/x-handlebars-template">
       <span class="task">
+        <span class="task-status">O </span>
         <b class="task-title">{{title}}</b>: <i class="task-content">{{content}}</i> 
         <span class="task-delete">[DELETE] </span> <span class="task-edit">[EDIT] </span>
       </span>
@@ -65,7 +74,7 @@
 
     <!-- Tasks list template -->
     <script id="tasks-template" type="text/x-handlebars-template">
-      <ul>
+      <ul class="no-bullets">
         {{#each tasks}}
           <li class="list-task">{{{this}}}</li>
         {{/each}}
