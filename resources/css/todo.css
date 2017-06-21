@@ -1,0 +1,34 @@
+body {
+  background-color: #C63D0F;
+  color: #3B3738;
+}
+
+.no-bullets {
+    list-style-type: none;
+}
+
+.task-status {
+  color: orange;
+  font-size: 20px;
+}
+
+.task-completed {
+  color: green;
+}
+
+.list-separator {
+  background-color: #7E8F7C;
+  width:100%;
+}
+
+.icon {
+  color: #FFFFFF;
+}
+
+.icon-red {
+  color: red;
+}
+
+.icon-green {
+  color: green;
+}

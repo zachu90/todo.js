@@ -6,19 +6,8 @@
     <meta http-equiv="content-type" content="text/html">
     <title> TODO List </title>
 
-    <style>
-      .no-bullets {
-          list-style-type: none;
-      }
-
-      .tasks {
-        border: 1px solid black;
-      }
-
-      .task-completed {
-        color: green;
-      }
-    </style>
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="resources/css/todo.css">
   </head>
   <body>
 
@@ -26,15 +15,18 @@
       <h1>Simple Task Manager</h1>
     </header>
 
+    <hr class="list-separator" />
     <article class="tasks">
       <!-- Tasks will be appended here -->
     </article>
+    <hr class="list-separator" />
 
     <footer>
       <p>Created by @zachu90</p>
     </footer>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.10/handlebars.min.js"></script>
     <script src="resources/js/todo.js"></script>
 
@@ -46,28 +38,47 @@
           {{{tasks}}}
         </div>
 
-        <input type="text" class="task-title-input" placeholder="Task title...">
-        <br />
-        <textarea class="task-content-input" placeholder="Task content..."></textarea>
-        <br />
-        <button class="task-add">add task</button>
+        <div class="col-xs-12 col-md-3">
+          <form class="form-horizontal">
+            <div class="form-group">
+              <label class="col-sm-2 control-label">Title</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control task-title-input" placeholder="Task title...">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2 control-label">Task</label>
+              <div class="col-sm-10">
+                <textarea class="form-control task-content-input" rows="3" placeholder="Task content..."></textarea>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-sm-offset-2 col-sm-10">
+                <button type="button" class="btn btn-primary task-add">Add task</button>
+              </div>
+            </div>
+          </form>
+        </div>
+
       </div>
     </script>
 
     <!-- Task template -->
     <script id="task-template" type="text/x-handlebars-template">
       <span class="task">
-        <span class="task-status">O </span>
-        <b class="task-title">{{title}}</b>: <i class="task-content">{{content}}</i> 
-        <span class="task-delete">[DELETE] </span> <span class="task-edit">[EDIT] </span>
+        <span class="glyphicon glyphicon-ok-sign task-status"></span>
+        <b class="task-title">{{title}}</b>: <i class="task-content">{{content}}</i>
+        <span class="icon glyphicon glyphicon-pencil task-edit"> </span>
+        <span class="icon glyphicon glyphicon-trash task-delete"> </span>
       </span>
     </script>
 
     <!-- Task edit template -->
     <script id="task-edit-template" type="text/x-handlebars-template">
-      Title: <input type="text" class="task-title-input" value="{{title}}"> 
-      Content: <input type="text" class="task-content-input" value="{{content}}"> 
-      <span class="task-update">[SAVE] </span> <span class="task-edit-discard">[DISCARD] </span>
+      Title: <input type="text" class="task-title-input" value="{{title}}">
+      Content: <input type="text" class="task-content-input" value="{{content}}">
+      <span class="icon-green glyphicon glyphicon-ok task-update"> </span>
+      <span class="icon-red glyphicon glyphicon-remove task-edit-discard"> </span>
       <input type="hidden" value="{{title}}" name="title">
       <input type="hidden" value="{{content}}" name="content">
     </script>
