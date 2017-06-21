@@ -4,5 +4,6 @@ Simple tasks manager written in JavaScript ES6.
 This project uses:
 - jQuery
 - handlebars.js
+- bootstrap3
 
-Very early development stage.
+The purpose of this project is to play with JavaScript ES6.
